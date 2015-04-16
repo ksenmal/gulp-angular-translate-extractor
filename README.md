@@ -24,3 +24,21 @@ gulp.task('taskName', function () {
       .pipe(gulp.dest(i18ndest));
 });
 ```
+This task will parse your src files, extract all the translation keys and creares two files 'en-US.json' and 'ru-RU.json' in dest directory. For the default lang ('en_US.json') file will be formatted like:
+```
+{
+    "1st Translation": "1st Translation",
+    "2nd Translation": "2nd Translation",
+    "3rd Translation": "3rd Translation",
+    ...
+}
+```
+For the non-default lang ('ru_RU.json') file will be formatted like:
+```
+{
+    "1st Translation": "",
+    "2nd Translation": "",
+    "3rd Translation": "",
+    ...
+}
+```
