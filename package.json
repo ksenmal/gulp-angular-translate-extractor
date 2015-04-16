@@ -1,0 +1,29 @@
+{
+  "name": "gulp-angular-translate-extractor",
+  "version": "1.0.0",
+  "description": "Gulp plugin extracts the translation keys for angular-translate.",
+  "main": "index.js",
+  "dependencies": {
+    "flat": "^1.5.1",
+    "gulp-util": "^3.0.4",
+    "json-stable-stringify": "^1.0.0",
+    "lodash": "^3.6.0",
+    "path": "^0.11.14",
+    "through2": "^0.6.5"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hard8candy/gulp-angular-translate-extractor.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hard8candy/gulp-angular-translate-extractor/issues"
+  },
+  "homepage": "https://github.com/hard8candy/gulp-angular-translate-extractor"
+}
