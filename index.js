@@ -1,5 +1,5 @@
 /* inspired by grunt-angular-translate
-* https://github.com/angular-translate/grunt-angular-translate - grunt plugin 
+* https://github.com/angular-translate/grunt-angular-translate - grunt plugin
 * Licensed under the MIT license.
 */
 var through = require('through2'),
@@ -10,18 +10,18 @@ var through = require('through2'),
   stringify = require('json-stable-stringify'),
   Translations = require('./lib/translations.js');
 
- 
+
 var _extractTranslation = function (regexName, regex, content, results) {
   var r;
   regex.lastIndex = 0;
   while ((r = regex.exec(content)) !== null) {
- 
+
     // Result expected [STRING, KEY, SOME_REGEX_STUF]
     // Except for plural hack [STRING, KEY, ARRAY_IN_STRING]
     if (r.length >= 2) {
       var translationKey, evalString;
       var translationDefaultValue = "";
- 
+
       switch (regexName) {
         case 'HtmlDirectivePluralFirst':
           var tmp = r[1];
@@ -37,12 +37,12 @@ var _extractTranslation = function (regexName, regex, content, results) {
         default:
           translationKey = r[1].trim();
       }
- 
+
       // Avoid empty translation
       if (translationKey === "") {
         return;
       }
- 
+
       switch (regexName) {
         case "commentSimpleQuote":
         case "HtmlFilterSimpleQuote":
@@ -64,7 +64,7 @@ var _extractTranslation = function (regexName, regex, content, results) {
     }
   }
 };
- 
+
 var escapeRegExp = function (str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 };
@@ -105,7 +105,7 @@ var mergeTranslations = function (results, lang, options) {
       catch (err) {
         translations = _translation.getMergedTranslations({}, isDefaultLang);
       }
-      stats = _translation.getStats();     
+      stats = _translation.getStats();
       statsString = lang + " statistics: " +
         " Updated: " + stats["updated"] +
         " / Deleted: " + stats["deleted"] +
@@ -114,7 +114,7 @@ var mergeTranslations = function (results, lang, options) {
 
     return translations;
 };
- 
+
 function extract(options) {
   options = _.assign({
     startDelimiter: '{{',
@@ -126,7 +126,7 @@ function extract(options) {
     stringifyOptions: false
   }, options);
 
-  var results = {}, firstFile, 
+  var results = {}, firstFile,
     regexs = {
       commentSimpleQuote: '\\/\\*\\s*i18nextract\\s*\\*\\/\'((?:\\\\.|[^\'\\\\])*)\'',
       commentDoubleQuote: '\\/\\*\\s*i18nextract\\s*\\*\\/"((?:\\\\.|[^"\\\\])*)"',
@@ -144,8 +144,8 @@ function extract(options) {
       JavascriptFilterSimpleQuote: '\\$filter\\(\\s*\'translate\'\\s*\\)\\s*\\(\\s*\'((?:\\\\.|[^\'\\\\])*)\'[^\\)]*\\)',
       JavascriptFilterDoubleQuote: '\\$filter\\(\\s*"translate"\\s*\\)\\s*\\(\\s*"((?:\\\\.|[^"\\\\\])*)"[^\\)]*\\)'
     };
- 
- 
+
+
   // gulp-related
   return through.obj(function (file, enc, cb) {
     if (file.isNull()) { // ignore empty files
@@ -160,7 +160,7 @@ function extract(options) {
       firstFile = file;
     }
     var content = file.contents.toString(), _regex;
- 
+
     for (var i in regexs) {
       _regex = new RegExp(regexs[i], "gi");
       switch (i) {
@@ -181,13 +181,13 @@ function extract(options) {
                 _extractTranslation(i, _regex, matches[index], results);
               }
             }
- 
+
           }
           break;
         // Others regex
         default:
           _extractTranslation(i, _regex, content, results);
- 
+
       }
     }
     cb();
@@ -210,5 +210,5 @@ function extract(options) {
     cb();
   });
 }
- 
+
 module.exports = extract;
