@@ -21,6 +21,9 @@
     "url": "https://github.com/hard8candy/gulp-angular-translate-extractor.git"
   },
   "author": "",
+  "contributors": [
+    "C.J. Winslow <whoaa512@gmail.com> (https://github.com/whoaa512)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hard8candy/gulp-angular-translate-extractor/issues"
