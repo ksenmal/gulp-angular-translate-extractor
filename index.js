@@ -88,8 +88,8 @@ var mergeTranslations = function (results, lang, options) {
     // Create translation object
     var _translation = new Translations({
         "safeMode": options.safeMode,
-        "tree": false,
-        "nullEmpty": false
+        "tree": options.tree,
+        "nullEmpty": options.nullEmpty
       }, results),
       destFileName = options.dest + '/' + lang + '.json',
       isDefaultLang = (options.defaultLang === lang),
