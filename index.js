@@ -131,6 +131,8 @@ function extract(options) {
       commentSimpleQuote: '\\/\\*\\s*i18nextract\\s*\\*\\/\'((?:\\\\.|[^\'\\\\])*)\'',
       commentDoubleQuote: '\\/\\*\\s*i18nextract\\s*\\*\\/"((?:\\\\.|[^"\\\\])*)"',
       HtmlFilterSimpleQuote: escapeRegExp(options.startDelimiter) + '\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
+      HtmlFilterSimpleQuoteOnce: escapeRegExp(options.startDelimiter) + '::\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
+      HtmlFilterSimpleQuoteValue: '\\(\'((?:\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*\\)',
       HtmlFilterDoubleQuote: escapeRegExp(options.startDelimiter) + '\\s*"((?:\\\\.|[^"\\\\\])*)"\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
       HtmlDirective: '<[^>]*translate[^{>]*>([^<]*)<\/[^>]*>',
       HtmlDirectiveStandalone: 'translate="((?:\\\\.|[^"\\\\])*)"',
