@@ -122,8 +122,10 @@ function extract(options) {
     defaultLang: 'en-US',
     lang: ['en-US', 'ru-RU'],
     dest: '.',
-    safeMode: false,
-    stringifyOptions: false
+    stringifyOptions: false,
+    safeMode: false,    //Translations options
+    tree: false,
+    nullEmpty: false
   }, options);
 
   var results = {}, firstFile, 
