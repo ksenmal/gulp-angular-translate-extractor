@@ -88,8 +88,8 @@ var mergeTranslations = function (results, lang, options) {
     // Create translation object
     var _translation = new Translations({
         "safeMode": options.safeMode,
-        "tree": false,
-        "nullEmpty": false
+        "tree": options.tree,
+        "nullEmpty": options.nullEmpty
       }, results),
       destFileName = options.dest + '/' + lang + '.json',
       isDefaultLang = (options.defaultLang === lang),
@@ -133,6 +133,8 @@ function extract(options) {
       commentSimpleQuote: '\\/\\*\\s*i18nextract\\s*\\*\\/\'((?:\\\\.|[^\'\\\\])*)\'',
       commentDoubleQuote: '\\/\\*\\s*i18nextract\\s*\\*\\/"((?:\\\\.|[^"\\\\])*)"',
       HtmlFilterSimpleQuote: escapeRegExp(options.startDelimiter) + '\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
+      HtmlFilterSimpleQuoteOnce: escapeRegExp(options.startDelimiter) + '::\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
+      HtmlFilterSimpleQuoteValue: '\\(\'((?:\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*\\)',
       HtmlFilterDoubleQuote: escapeRegExp(options.startDelimiter) + '\\s*"((?:\\\\.|[^"\\\\\])*)"\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
       HtmlDirective: '<[^>]*translate[^{>]*>([^<]*)<\/[^>]*>',
       HtmlDirectiveStandalone: 'translate="((?:\\\\.|[^"\\\\])*)"',
