@@ -91,7 +91,7 @@ var mergeTranslations = function (results, lang, options) {
         "tree": options.tree,
         "nullEmpty": options.nullEmpty
       }, results),
-      destFileName = options.dest + '/' + lang + '.json',
+      destFileName = options.dest + '/' + options.prefix + lang + options.suffix,
       isDefaultLang = (options.defaultLang === lang),
       translations = {},
       json = {},
@@ -122,6 +122,8 @@ function extract(options) {
     defaultLang: 'en-US',
     lang: ['en-US', 'ru-RU'],
     dest: '.',
+    prefix: '',
+    suffix: '.json',
     stringifyOptions: false,
     safeMode: false,    //Translations options
     tree: false,
@@ -201,13 +203,15 @@ function extract(options) {
       return;
     }
     var _this = this,
-      translations = {};
+      translations = {},
+      destFileName;
     options.lang.forEach(function (lang) {
       translations = mergeTranslations(results, lang, options);
+      destFileName = options.prefix + lang + options.suffix;
       _this.push(new gutil.File({
         cwd: firstFile.cwd,
         base: firstFile.base,
-        path: path.join(firstFile.base, lang + '.json'),
+        path: path.join(firstFile.base, destFileName),
         contents: new Buffer(customStringify(translations, options.stringifyOptions))
       }));
     });
