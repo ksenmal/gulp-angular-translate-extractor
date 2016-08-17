@@ -22,6 +22,7 @@ gulp.task('taskName', function () {
           suffix: '.suffix',          // output filename suffix, default '.json'
           safeMode: false,            // do not delete old translations, true - contrariwise, default false
           stringifyOptions: true,     // force json to be sorted, false - contrariwise, default false
+          formatEmpty: ""             // define format of the empty message using _.template syntax. Original string is supported using <%=s%>
       }))
       .pipe(gulp.dest(i18ndest));
 });

@@ -86,11 +86,17 @@ var customStringify = function (val, stringifyOptions) {
 
 var mergeTranslations = function (results, lang, options) {
     // Create translation object
-    var _translation = new Translations({
-        "safeMode": options.safeMode,
-        "tree": options.tree,
-        "nullEmpty": options.nullEmpty
-      }, results),
+    var _options = {
+      "safeMode": options.safeMode,
+      "tree": options.tree,
+      "formatEmpty": options.formatEmpty
+    };
+    
+    if (options.nullEmpty) { // convert deprecated nullEmpty
+      _options.formatEmpty = null;
+    }
+    
+    var _translation = new Translations(_options, results),
       destFileName = options.dest + '/' + options.prefix + lang + options.suffix,
       isDefaultLang = (options.defaultLang === lang),
       translations = {},
@@ -127,7 +133,8 @@ function extract(options) {
     stringifyOptions: false,
     safeMode: false,    //Translations options
     tree: false,
-    nullEmpty: false
+    nullEmpty: false, // deprecated, overwrites formatEmpty with null when is true
+    formatEmpty: "",
   }, options);
 
   var results = {}, firstFile, 
