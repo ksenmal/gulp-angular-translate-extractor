@@ -15,7 +15,6 @@ var _extractTranslation = function (regexName, regex, content, results) {
   var r;
   regex.lastIndex = 0;
   while ((r = regex.exec(content)) !== null) {
- 
     // Result expected [STRING, KEY, SOME_REGEX_STUF]
     // Except for plural hack [STRING, KEY, ARRAY_IN_STRING]
     if (r.length >= 2) {
@@ -60,7 +59,17 @@ var _extractTranslation = function (regexName, regex, content, results) {
           translationKey = translationKey.replace(/\\\"/g, '"');
           break;
       }
-      results[translationKey] = translationDefaultValue;
+
+      if (regexName === 'HtmlDirectiveAttributes') {
+          var translationObject;
+          eval('translationObject = ' + r[1]);
+          for (var key in translationObject) {
+              translationKey = translationObject[key];
+              results[translationKey] = translationDefaultValue;
+          }
+      } else {
+          results[translationKey] = translationDefaultValue;
+      }
     }
   }
 };
@@ -140,6 +149,8 @@ function extract(options) {
       HtmlFilterDoubleQuote: escapeRegExp(options.startDelimiter) + '\\s*"((?:\\\\.|[^"\\\\\])*)"\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
       HtmlDirective: '<[^>]*translate[^{>]*>([^<]*)<\/[^>]*>',
       HtmlDirectiveStandalone: 'translate="((?:\\\\.|[^"\\\\])*)"',
+      HtmlDirectiveAttributes: 'translate\-attr="([^"]+)"',
+      HtmlDirectiveAttribute: 'translate\-attr\-(?:.*)="(.+)"',
       HtmlDirectivePluralLast: 'translate="((?:\\\\.|[^"\\\\])*)".*angular-plural-extract="((?:\\\\.|[^"\\\\])*)"',
       HtmlDirectivePluralFirst: 'angular-plural-extract="((?:\\\\.|[^"\\\\])*)".*translate="((?:\\\\.|[^"\\\\])*)"',
       HtmlNgBindHtml: 'ng-bind-html="\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*"',
