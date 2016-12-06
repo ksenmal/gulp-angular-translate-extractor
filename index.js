@@ -150,6 +150,7 @@ function extract(options) {
       HtmlDirective: '<[^>]*translate[^{>]*>([^<]*)<\/[^>]*>',
       HtmlDirectiveStandalone: 'translate="((?:\\\\.|[^"\\\\])*)"',
       HtmlDirectiveAttributes: 'translate\-attr="([^"]+)"',
+      HtmlDirectiveAttribute: 'translate\-attr\-(?:.*)="(.+)"',
       HtmlDirectivePluralLast: 'translate="((?:\\\\.|[^"\\\\])*)".*angular-plural-extract="((?:\\\\.|[^"\\\\])*)"',
       HtmlDirectivePluralFirst: 'angular-plural-extract="((?:\\\\.|[^"\\\\])*)".*translate="((?:\\\\.|[^"\\\\])*)"',
       HtmlNgBindHtml: 'ng-bind-html="\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*"',
