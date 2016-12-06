@@ -5,6 +5,10 @@ Gulp plugin extracts the translation keys for angular-translate.
 via npm  
 `npm install gulp-angular-translate-extractor`
 
+# Important notice
+
+This plugins supports extraction of attribute translations like `translate-attr="{attrname: 'translation_id'}"` with eval. Only use it on code you trust.
+
 # Usage  
 Example:
 ```
