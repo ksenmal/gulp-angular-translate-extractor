@@ -138,7 +138,7 @@ function extract(options) {
       HtmlFilterSimpleQuoteOnce: escapeRegExp(options.startDelimiter) + '::\\s*\'((?:\\\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
       HtmlFilterSimpleQuoteValue: '\\(\'((?:\\.|[^\'\\\\])*)\'\\s*\\|\\s*translate(:.*?)?\\s*\\)',
       HtmlFilterDoubleQuote: escapeRegExp(options.startDelimiter) + '\\s*"((?:\\\\.|[^"\\\\\])*)"\\s*\\|\\s*translate(:.*?)?\\s*' + escapeRegExp(options.endDelimiter),
-      HtmlDirective: '<[^>]*translate[^{>]*>([^<]*)<\/[^>]*>',
+      // HtmlDirective: '<[^>]*translate[^{>]*>([^<]*)<\/[^>]*>',
       HtmlDirectiveStandalone: 'translate="((?:\\\\.|[^"\\\\])*)"',
       HtmlDirectivePluralLast: 'translate="((?:\\\\.|[^"\\\\])*)".*angular-plural-extract="((?:\\\\.|[^"\\\\])*)"',
       HtmlDirectivePluralFirst: 'angular-plural-extract="((?:\\\\.|[^"\\\\])*)".*translate="((?:\\\\.|[^"\\\\])*)"',
