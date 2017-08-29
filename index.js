@@ -60,7 +60,17 @@ var _extractTranslation = function (regexName, regex, content, results) {
           translationKey = translationKey.replace(/\\\"/g, '"');
           break;
       }
-      results[translationKey] = translationDefaultValue;
+      
+      if (regexName === 'HtmlDirectiveAttributes') {
+        var translationObject;
+        eval('translationObject = ' + r[1]);
+        for (var key in translationObject) {
+          translationKey = translationObject[key];
+          results[translationKey] = translationDefaultValue;
+        }
+      } else {
+        results[translationKey] = translationDefaultValue;
+      }
     }
   }
 };
